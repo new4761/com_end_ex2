@@ -2,6 +2,7 @@ import java.rmi.*;
 import java.net.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 public class PrimeFinderClient
 {
    public static void main(String[] args)
@@ -14,7 +15,16 @@ public class PrimeFinderClient
        {
           Registry registry = LocateRegistry.getRegistry(args[0]);
           PrimeFinderInterface stub = (PrimeFinderInterface) registry.lookup("PrimeFinderServer");
-          PrimeInfo outPutFromServer = stub.findPrimes(1,1000);
+          int min,max;
+          Scanner sc = new Scanner(System.in);
+          System.out.print("Min value =>"); 
+          min = sc.nextInt();
+
+          System.out.print("Max value =>"); 
+          max = sc.nextInt();
+
+
+          PrimeInfo outPutFromServer = stub.findPrimes(min,max);
           System.out.print("ALL PrimeNumber [ ");
           for(int x :outPutFromServer.primes)
           {
